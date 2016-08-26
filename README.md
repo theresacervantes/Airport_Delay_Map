@@ -6,6 +6,10 @@ This project attempts to create a live-streaming map of US airport delays based 
 
 ![GitHub Logo](/mapImages/Screenshot.png)
 
+## Pipeline / Flowchart: 
+
+![Pipeline](/mapImages/Pipeline.png)
+
 ## Programs used:
 
 - Pyspark
@@ -15,7 +19,3 @@ This project attempts to create a live-streaming map of US airport delays based 
 - PostgreSQL
 - Matplotlib
 - Jupyter notebook 
-
-## Pipeline / Flowchart: 
-
-![Pipeline](/mapImages/Pipeline.png)
