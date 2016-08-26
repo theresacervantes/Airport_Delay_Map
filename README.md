@@ -15,3 +15,7 @@ Programs used:
 - PostgreSQL
 - Matplotlib
 - Jupyter notebook 
+
+Pipeline / Flowchart: 
+
+![Pipeline](/mapImages/Pipeline.png)
