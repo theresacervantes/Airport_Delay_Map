@@ -1,11 +1,31 @@
 ## Imports
-import urllib2, urllib, json, requests, time, os.path
+import urllib2, urllib, json, requests, time, os.path, psycopg2
 import pandas as pd
 from urllib2 import HTTPError
 from datetime import datetime
 
+def JSONtoPostgres(x):
+    
+    '''
+    Save JSON to Postgres
+    '''
+    
+    #import username and password for postgres
+    with open('/Users/theresa/postgres.json') as f:
+        data = json.load(f)
+        user = data['user'] 
+        password = data['password']
+    try:
+        conn = psycopg2.connect("dbname='finalproject' user='{}' host='localhost' password='{}'".format(user,password))
+        x0 = json.dumps(x)
+        cur = conn.cursor()
+        cur.execute("INSERT INTO delaytable (data) VALUES(%s);",(x0,))
+    except:
+        print "JSONtoPostgres didn't work!"
+        pass
 
-df = pd.read_csv('us_airports.csv')
+
+df = pd.read_csv('airportData/us_airports.csv')
 iata = set(df.iata_code)
 now = datetime.now()
 
@@ -39,5 +59,10 @@ while True:
         json.dump(l, file1)
     file1.close()
     
+    #Save to Postgres
+    JSONtoPostgres(l)
+    
     end = time.time()
+    
+    #Run again in an hour
     time.sleep(3600 - (end-start))
